@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">thisAble</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="splash_content">thisAble</string>
+    <string name="explore_thisAble">Explore thisAble</string>
+
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+</resources>
