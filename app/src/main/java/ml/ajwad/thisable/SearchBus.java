@@ -1,9 +1,10 @@
 package ml.ajwad.thisable;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SearchBus extends AppCompatActivity {
+public class SearchBus extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

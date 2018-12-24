@@ -1,9 +1,10 @@
 package ml.ajwad.thisable;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SelectRoute extends AppCompatActivity {
+public class SelectRoute extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

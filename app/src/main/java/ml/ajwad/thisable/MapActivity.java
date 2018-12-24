@@ -1,9 +1,10 @@
 package ml.ajwad.thisable;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
