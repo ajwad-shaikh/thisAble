@@ -1,6 +1,7 @@
 package ml.ajwad.thisable;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,11 +29,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final String TAG = MapActivity.class.getSimpleName();
     private HashMap<String, Marker> mMarkers = new HashMap<>();
+    private HashMap<String, Polyline> mPoly = new HashMap<>();
     private GoogleMap mMap;
     private Bitmap smallMarker;
 
@@ -127,8 +132,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                     .title(key)
                     .position(location)
                     .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
+            mPoly.put(key, mMap.addPolyline(new PolylineOptions()
+                    .add(location)
+                    .width(5)
+                    .color(Color.BLUE)));
+
         } else {
             mMarkers.get(key).setPosition(location);
+            List<LatLng> points = mPoly.get(key).getPoints();
+            points.add(location);
+            mPoly.get(key).setPoints(points);
         }
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (Marker marker : mMarkers.values()) {
