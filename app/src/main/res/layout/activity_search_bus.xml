@@ -109,11 +109,6 @@
         android:paddingStart="14dp"
         android:paddingEnd="14dp">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ScrollView>
     </ListView>
 
 </LinearLayout>

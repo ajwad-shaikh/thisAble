@@ -31,9 +31,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchBus" />
-        <activity android:name=".SelectRoute" />
-        <activity android:name=".SelectStop" />
+        <activity
+            android:name=".SearchBus"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".SelectRoute"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".SelectStop"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map">
