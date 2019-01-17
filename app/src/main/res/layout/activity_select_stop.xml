@@ -59,7 +59,7 @@
             android:columnOrderPreserved="false">
 
             <EditText
-                android:id="@+id/routeBox"
+                android:id="@+id/stopBox"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:ems="10"
