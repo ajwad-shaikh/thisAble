@@ -13,6 +13,6 @@
     <string name="firebase_password" translatable="false">thisAble@1798</string>
 
     <string name="database_path" translatable="false">/data/data/ml.ajwad.thisAble/databases/</string>
-    <string name="database_name" translatable="false">thisAble</string>
+    <string name="database_name" translatable="false">thisAble.db</string>
 
 </resources>
