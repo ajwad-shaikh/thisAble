@@ -64,7 +64,7 @@ public class RouteListViewAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         // Set the results into TextViews
-        holder.routeID.setText(routeList.get(position).getRouteID());
+        holder.routeID.setText(routeList.get(position).getRouteID().toString());
         holder.source.setText(routeList.get(position).getSource());
         holder.destination.setText(routeList.get(position).getDestination());
 

@@ -119,6 +119,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         .title(name)
                         .position(location)
                         .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
+                cursor.moveToNext();
             }
         }
         cursor.close();

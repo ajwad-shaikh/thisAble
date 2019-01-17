@@ -41,6 +41,7 @@ public class SearchBus extends Activity {
             while (!cursor.isAfterLast()) {
                 String name = cursor.getString(cursor.getColumnIndex("NAME"));
                 busStop.add(name);
+                cursor.moveToNext();
             }
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>

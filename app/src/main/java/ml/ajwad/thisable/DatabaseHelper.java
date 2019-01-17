@@ -16,9 +16,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
 
-    private String DB_PATH = Resources.getSystem().getString(R.string.database_path);
+    private String DB_PATH = "/data/data/ml.ajwad.thisable/databases/";
 
-    private static String DB_NAME = Resources.getSystem().getString(R.string.database_name);
+    private static String DB_NAME = "thisAble.sqlite";
 
     private SQLiteDatabase myDataBase;
 

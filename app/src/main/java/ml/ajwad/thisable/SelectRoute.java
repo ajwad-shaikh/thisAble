@@ -48,9 +48,11 @@ public class SelectRoute extends Activity {
                 String destination = cursor.getString(cursor.getColumnIndex("DESTINATION"));
                 Route rt = new Route(routeID, source, destination);
                 arraylist.add(rt);
+                cursor.moveToNext();
             }
         }
         cursor.close();
+        listView = findViewById(R.id.routeList);
         routeListViewAdapter = new RouteListViewAdapter(this, arraylist);
         listView.setAdapter(routeListViewAdapter);
         editsearch = findViewById(R.id.routeBox);

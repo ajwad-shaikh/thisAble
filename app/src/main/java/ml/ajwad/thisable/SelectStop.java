@@ -47,9 +47,11 @@ public class SelectStop extends Activity {
                 Double longitude = cursor.getDouble(cursor.getColumnIndex("LONGITUDE"));
                 Stop sp = new Stop(stopName, latitude, longitude);
                 arraylist.add(sp);
+                cursor.moveToNext();
             }
         }
         cursor.close();
+        listView = findViewById(R.id.stopList);
         stopListViewAdapter = new StopListViewAdapter(this, arraylist);
         listView.setAdapter(stopListViewAdapter);
         editsearch = findViewById(R.id.stopBox);

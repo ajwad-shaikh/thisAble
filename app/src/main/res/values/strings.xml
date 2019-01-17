@@ -12,7 +12,7 @@
     <string name="firebase_email" translatable="false">2017333@iiitdmj.ac.in</string>
     <string name="firebase_password" translatable="false">thisAble@1798</string>
 
-    <string name="database_path" translatable="false">/data/data/ml.ajwad.thisAble/databases/</string>
-    <string name="database_name" translatable="false">thisAble.db</string>
+    <string name="database_path" translatable="false">/data/data/ml.ajwad.thisable/databases/</string>
+    <string name="database_name" translatable="false">thisAble.sqlite</string>
 
 </resources>
