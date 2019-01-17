@@ -1,5 +1,8 @@
 package ml.ajwad.thisable;
 
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -28,26 +31,46 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final String MARKERS = "markers";
+    private static final String POLY = "poly_lines";
+
+    DatabaseHelper myDBHelper;
+
     private static final String TAG = MapActivity.class.getSimpleName();
     private HashMap<String, Marker> mMarkers = new HashMap<>();
     private HashMap<String, Polyline> mPoly = new HashMap<>();
+    private HashMap<String, Marker> mStops = new HashMap<>();
     private GoogleMap mMap;
     private Bitmap smallMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null)
+        {
+            mMarkers = (HashMap<String, Marker>)savedInstanceState.getSerializable(MARKERS);
+            mPoly = (HashMap<String, Polyline>)savedInstanceState.getSerializable(POLY);
+        }
         setContentView(R.layout.activity_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(MARKERS, mMarkers);
+        outState.putSerializable(POLY, mPoly);
+        super.onSaveInstanceState(outState);
+    }
+
 
     /**
      * Manipulates the map once available.
@@ -68,7 +91,36 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.invert_eye);
         Bitmap b=bitmapdraw.getBitmap();
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        getDataBaseData();
         loginToFirebase();
+    }
+
+    private  void getDataBaseData() {
+        myDBHelper = new DatabaseHelper(this);
+        try {
+            myDBHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+        try {
+            myDBHelper.openDataBase();
+        }catch(SQLException sqle){
+            throw sqle;
+        }
+        SQLiteDatabase myDB = myDBHelper.getReadableDatabase();
+        Cursor cursor = myDB.rawQuery("SELECT NAME FROM BUS_STOPS", null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                String name = cursor.getString(cursor.getColumnIndex("NAME"));
+                Double latitude = cursor.getDouble(cursor.getColumnIndex("LATITUDE"));
+                Double longitude = cursor.getDouble(cursor.getColumnIndex("LONGITUDE"));
+                LatLng location = new LatLng(latitude, longitude);
+                mMarkers.put(name, mMap.addMarker(new MarkerOptions()
+                        .title(name)
+                        .position(location)
+                        .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
+            }
+        }
     }
 
     private void loginToFirebase() {
