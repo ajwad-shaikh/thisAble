@@ -108,7 +108,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             throw sqle;
         }
         SQLiteDatabase myDB = myDBHelper.getReadableDatabase();
-        Cursor cursor = myDB.rawQuery("SELECT NAME FROM BUS_STOPS", null);
+        Cursor cursor = myDB.rawQuery("SELECT NAME, LATITUDE, LONGITUDE FROM BUS_STOPS", null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 String name = cursor.getString(cursor.getColumnIndex("NAME"));
@@ -121,6 +121,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
             }
         }
+        cursor.close();
     }
 
     private void loginToFirebase() {
