@@ -76,7 +76,7 @@
                     android:inputType="textAutoComplete"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="5dp"
-                    android:text="Source" />
+                    android:hint="Source" />
 
                 <AutoCompleteTextView
                     android:id="@+id/destBox"
@@ -85,7 +85,7 @@
                     android:ems="10"
                     android:inputType="textAutoComplete"
                     android:layout_marginBottom="5dp"
-                    android:text="Destination" />
+                    android:hint="Destination" />
 
                 <Button
                     android:id="@+id/searchButton"
@@ -95,8 +95,6 @@
                     android:text="Search"/>
 
             </LinearLayout>
-
-
 
         </android.support.v7.widget.CardView>
 
