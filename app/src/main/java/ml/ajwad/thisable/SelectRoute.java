@@ -21,7 +21,7 @@ public class SelectRoute extends Activity {
     ListView listView;
     RouteListViewAdapter routeListViewAdapter;
     EditText editsearch;
-    ArrayList<Route> arraylist = new ArrayList<Route>();
+    ArrayList<Route> arraylist = new ArrayList<>();
 
 
     @Override

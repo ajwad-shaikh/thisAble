@@ -1,9 +1,5 @@
 package ml.ajwad.thisable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,17 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
 
-public class RouteListViewAdapter extends BaseAdapter {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
+public class BusListViewAdapter extends BaseAdapter{
     // Declare Variables
     private Context mContext;
     private LayoutInflater inflater;
     private List<Route> routeList = null;
     private ArrayList<Route> arraylist;
 
-    public RouteListViewAdapter(Context context, List<Route> routeList) {
+    public BusListViewAdapter(Context context, List<Route> routeList) {
         mContext = context;
         this.routeList = routeList;
         inflater = LayoutInflater.from(mContext);
@@ -69,7 +67,7 @@ public class RouteListViewAdapter extends BaseAdapter {
         holder.destination.setText(routeList.get(position).getDestination());
 
         // Listen for ListView Item Click
-        view.setOnClickListener(new OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

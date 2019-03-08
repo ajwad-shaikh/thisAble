@@ -101,11 +101,13 @@
     </GridLayout>
 
     <ListView
+        android:id="@+id/routeSearchList"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="5"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp">
+        android:layout_weight="8"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
 
     </ListView>
 
