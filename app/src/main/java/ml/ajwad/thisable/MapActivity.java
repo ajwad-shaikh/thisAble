@@ -48,6 +48,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private HashMap<String, Marker> mStops = new HashMap<>();
     private GoogleMap mMap;
     private Bitmap smallMarker;
+    private Bitmap stopMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.invert_eye);
         Bitmap b=bitmapdraw.getBitmap();
         smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.stop_icon);
+        b = bitmapdraw.getBitmap();
+        stopMarker = Bitmap.createScaledBitmap(b, 75, 75, false);
+
         getDataBaseData();
         loginToFirebase();
     }
@@ -118,7 +123,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 mMarkers.put(name, mMap.addMarker(new MarkerOptions()
                         .title(name)
                         .position(location)
-                        .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
+                        .icon(BitmapDescriptorFactory.fromBitmap(stopMarker))));
                 cursor.moveToNext();
             }
         }
