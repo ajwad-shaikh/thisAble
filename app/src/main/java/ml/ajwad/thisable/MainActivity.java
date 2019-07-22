@@ -2,16 +2,11 @@ package ml.ajwad.thisable;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.view.Gravity;
+import androidx.cardview.widget.CardView;
+
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {

@@ -35,7 +35,7 @@
         android:padding="14dp">
 
         <!-- Search Buses R1C1-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -71,10 +71,10 @@
 
             </LinearLayout>
             
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!-- GPS Map Buses R1C2-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -109,10 +109,10 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!-- Select Route R2C1-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -147,10 +147,10 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!-- Select Bus Stop R2C2-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -185,12 +185,12 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
     </GridLayout>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/assistCard"
         android:layout_weight="2"
         android:layout_width="match_parent"
@@ -233,11 +233,8 @@
 
             </GridLayout>
 
-
-
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
-
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
