@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -59,6 +60,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             mPoly = (HashMap<String, Polyline>)savedInstanceState.getSerializable(POLY);
         }
         setContentView(R.layout.activity_map);
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> onBackPressed());
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
