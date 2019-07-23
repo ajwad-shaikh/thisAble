@@ -20,11 +20,11 @@
         <ImageButton
             android:padding="15dp"
             android:id="@+id/backButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
             android:layout_gravity="center_vertical"
-            android:background="@android:drawable/ic_menu_close_clear_cancel"/>
+            android:background="@drawable/back_arrow"
+            android:backgroundTint="@color/white"/>
 
         <TextView
             android:layout_width="0dp"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_gravity="center_vertical"
-                android:src="@android:drawable/ic_search_category_default"
+                android:src="@drawable/search"
                 android:background="@color/white" />
 
         </GridLayout>

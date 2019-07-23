@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@android:drawable/ic_menu_search"
+                    android:src="@drawable/search"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@android:drawable/ic_menu_mapmode"
+                    android:src="@drawable/map"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@android:drawable/ic_search_category_default"
+                    android:src="@drawable/bus"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -169,7 +169,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@android:drawable/ic_search_category_default"
+                    android:src="@drawable/bus_stop"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -217,7 +217,7 @@
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@android:drawable/ic_menu_compass"
+                    android:src="@drawable/assistance"
                     android:layout_columnWeight="3">
                 </ImageView>
 
