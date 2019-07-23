@@ -6,10 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageButton;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,6 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -75,32 +78,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         super.onSaveInstanceState(outState);
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // Authenticate with Firebase when the Google map is loaded
         mMap = googleMap;
         mMap.setMaxZoomPreference(16);
-        int height = 50;
-        int width = 50;
         BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.invert_eye);
         Bitmap b=bitmapdraw.getBitmap();
-        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        smallMarker = Bitmap.createScaledBitmap(b, 50, 50, false);
         bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.stop_icon);
         b = bitmapdraw.getBitmap();
         stopMarker = Bitmap.createScaledBitmap(b, 75, 75, false);
-
         getDataBaseData();
         loginToFirebase();
+        simulateRoute();
     }
 
     private  void getDataBaseData() {
@@ -123,7 +114,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 Double latitude = cursor.getDouble(cursor.getColumnIndex("LATITUDE"));
                 Double longitude = cursor.getDouble(cursor.getColumnIndex("LONGITUDE"));
                 LatLng location = new LatLng(latitude, longitude);
-                mMarkers.put(name, mMap.addMarker(new MarkerOptions()
+                mStops.put(name, mMap.addMarker(new MarkerOptions()
                         .title(name)
                         .position(location)
                         .icon(BitmapDescriptorFactory.fromBitmap(stopMarker))));
@@ -131,6 +122,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         }
         cursor.close();
+        mMap.setOnMapLoadedCallback(() -> setBounds(mStops));
+    }
+
+    private void setBounds(HashMap<String, Marker> markerHashMap) {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Marker marker : markerHashMap.values()) {
+            builder.include(marker.getPosition());
+        }
+        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100));
     }
 
     private void loginToFirebase() {
@@ -179,11 +179,37 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         });
     }
 
+    private void simulateRoute() {
+        LatLng locationCenter = new LatLng(22.522379, 88.401295);
+        Marker routeOne = mMap.addMarker(new MarkerOptions()
+                .title("Route 1")
+                .position(locationCenter)
+                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+        Polyline routeOneTrack = mMap.addPolyline(new PolylineOptions()
+                .add(locationCenter)
+                .width(5)
+                .color(Color.BLUE));
+        List<LatLng> pointsOne = new ArrayList<>();
+        pointsOne.add(locationCenter);
+        routeOneTrack.setPoints(pointsOne);
+        final Handler handler = new Handler();
+        Runnable task = new Runnable() {
+                @Override
+                public void run() {
+                    LatLng currLocation = routeOne.getPosition();
+                    Double latitude = currLocation.latitude + (1 * (Math.random() * Math.random()) % 0.0005);
+                    Double longitude = currLocation.longitude + (-1  * (Math.random() * Math.random()) % 0.0005);
+                    LatLng nextLocation = new LatLng(latitude, longitude);
+                    routeOne.setPosition(nextLocation);
+                    pointsOne.add(nextLocation);
+                    routeOneTrack.setPoints(pointsOne);
+                    handler.postDelayed(this, 1500);
+                }
+        };
+        handler.post(task);
+    }
+
     private void setMarker(DataSnapshot dataSnapshot) {
-        // When a location update is received, put or update
-        // its value in mMarkers, which contains all the markers
-        // for locations received, so that we can build the
-        // boundaries required to show them all on the map at once
         String key = dataSnapshot.getKey();
         HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
         double lat = Double.parseDouble(value.get("latitude").toString());
@@ -205,11 +231,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             points.add(location);
             mPoly.get(key).setPoints(points);
         }
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (Marker marker : mMarkers.values()) {
-            builder.include(marker.getPosition());
-        }
-        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 300));
     }
+
+    private Double plusMinus() {
+        Double random = Math.random();
+        random -= 0.5;
+        return Math.signum(random);
+    };
 }
 
